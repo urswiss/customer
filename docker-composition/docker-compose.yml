@@ -1,0 +1,14 @@
+version: "3.5"
+services:
+
+  mongodb:
+    image: mvertes/alpine-mongo:4.0.0-0
+    container_name: urs.mongodb
+    ports:
+    - "127.0.0.1:27017:27017"
+    volumes:
+    - ./docker/mongodb:/data/db
+    restart: always
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongo localhost:27017/test --quiet
+      start_period: 30s
