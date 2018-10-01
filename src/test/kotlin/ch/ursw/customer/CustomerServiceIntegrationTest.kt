@@ -1,6 +1,6 @@
 package ch.ursw.customer
 
-import ch.ursw.customer.entity.Customer
+import ch.ursw.customer.controller.CustomerVO
 import ch.ursw.customer.service.CustomerService
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterAll
@@ -20,8 +20,8 @@ class CustomerServiceIntegrationTest(@Autowired val sut: CustomerService) {
     }
 
     fun `create customer`() {
-        val customer = Customer(firstName = "fritzli", lastName = "meier", city = "basel", age = 52)
-        val result = sut.createCustomer(customer)
+        val customerVO = CustomerVO(firstName = "fritzli", lastName = "meier", city = "basel", age = 52)
+        val result = sut.createCustomer(customerVO)
         assertThat(result.id).isNotNull()
     }
 

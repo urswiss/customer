@@ -1,7 +1,10 @@
 package ch.ursw.customer.service
 
+import ch.ursw.customer.controller.CustomerVO
 import ch.ursw.customer.entity.Customer
+import ch.ursw.customer.mapper.CustomerMapper
 import ch.ursw.customer.repository.CustomerRepository
+import org.mapstruct.factory.Mappers
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
@@ -14,5 +17,9 @@ class CustomerServiceImpl : CustomerService {
 
     override fun isAdult(age:Int) = age>17
 
-    override fun createCustomer(customer: Customer) = customerRepository.save(customer)
+    override fun createCustomer(customerVO: CustomerVO) : CustomerVO {
+        val mapper = Mappers.getMapper(CustomerMapper::class.java)
+        val customer: Customer = customerRepository.save(mapper.customerVOToCustomer(customerVO))
+        return mapper.customerToCustomerVO(customer)
+    }
 }
