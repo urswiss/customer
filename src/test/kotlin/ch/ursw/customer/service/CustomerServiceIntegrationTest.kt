@@ -10,9 +10,11 @@ import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.junit.jupiter.SpringExtension
+import org.springframework.transaction.annotation.Transactional
 
 @ExtendWith(SpringExtension::class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@Transactional
 internal class CustomerServiceIntegrationTest(@Autowired val sut: CustomerService) {
 
     @BeforeAll
@@ -27,7 +29,7 @@ internal class CustomerServiceIntegrationTest(@Autowired val sut: CustomerServic
         assertThat(result.id).isNotNull()
     }
 
-    @Disabled
+    @Disabled("https://stackoverflow.com/questions/52588574/cant-use-transactional-in-spring-boot-test")
     @Test
     fun `get customer`() {
         val result: List<CustomerVO> = sut.getAllCustomers()
