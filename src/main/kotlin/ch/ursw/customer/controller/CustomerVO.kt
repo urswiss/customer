@@ -1,9 +1,13 @@
 package ch.ursw.customer.controller
 
 data class CustomerVO (
-    val id: String? = null,
-    val firstName: String,
-    val lastName: String,
-    val city: String,
-    val age: Int
+    var id: String? = null,
+    var firstName: String?,
+    var lastName: String?,
+    var city: String?,
+    var age: Int?
 )
+{
+    // Necessary for MapStruct
+    constructor() : this(null, null, null, null, null)
+}
