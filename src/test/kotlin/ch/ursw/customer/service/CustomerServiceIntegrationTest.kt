@@ -4,6 +4,7 @@ import ch.ursw.customer.controller.CustomerVO
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
@@ -24,6 +25,13 @@ internal class CustomerServiceIntegrationTest(@Autowired val sut: CustomerServic
         val customerVO = CustomerVO(firstName = "fritzli", lastName = "meier", city = "basel", age = 52)
         val result = sut.createCustomer(customerVO)
         assertThat(result.id).isNotNull()
+    }
+
+    @Disabled
+    @Test
+    fun `get customer`() {
+        val result: List<CustomerVO> = sut.getAllCustomers()
+        assertThat(result.size).isEqualTo(3)
     }
 
     @AfterAll

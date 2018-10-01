@@ -10,6 +10,7 @@ import org.mapstruct.Mapping
 interface CustomerMapper {
     @Mapping(source = "firstName", target="firstName")
     fun customerToCustomerVO(customer: Customer): CustomerVO
+    fun customersToCustomerVOs(customer: List<Customer>): List<CustomerVO>
 
     @InheritInverseConfiguration
     fun customerVOToCustomer(customer: CustomerVO): Customer
