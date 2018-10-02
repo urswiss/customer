@@ -6,4 +6,5 @@ interface CustomerService {
     fun getAllCustomers() : List<CustomerVO>
     fun isAdult(age:Int) : Boolean
     fun createCustomer(customerVO: CustomerVO) : CustomerVO
+    fun deleteCustomer(customerId: String)
 }

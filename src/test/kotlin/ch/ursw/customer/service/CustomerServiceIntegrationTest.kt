@@ -4,7 +4,6 @@ import ch.ursw.customer.controller.CustomerVO
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.BeforeAll
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
@@ -25,9 +24,10 @@ internal class CustomerServiceIntegrationTest(@Autowired val sut: CustomerServic
         val customerVO = CustomerVO(firstName = "fritzli", lastName = "meier", city = "basel", age = 52)
         val result = sut.createCustomer(customerVO)
         assertThat(result.id).isNotNull()
+        sut.deleteCustomer(result.id!!)
     }
 
-    @Disabled("https://stackoverflow.com/questions/52588574/cant-use-transactional-in-spring-boot-test")
+    // why I don't use @Transactional: https://stackoverflow.com/questions/52588574/cant-use-transactional-in-spring-boot-test
     @Test
     fun `get customer`() {
         val result: List<CustomerVO> = sut.getAllCustomers()
